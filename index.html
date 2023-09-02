@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos de Inglés y Francés</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlazar el archivo CSS externo -->
+
+</head>
+<body>
+    <header>
+        <h1>Cursos de Inglés y Francés</h1>
+    </header>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Contacto</a>
+        <a href="#">Acerca de nosotros</a>
+    </nav>
+    <div class="container">
+        <h2>Seleccione una categoría:</h2>
+        <select id="category">
+            <option value="ingles">Inglés</option>
+            <option value="frances">Francés</option>
+        </select>
+        <div id="courses">
+            <!-- Aquí se mostrarán los cursos según la categoría seleccionada -->
+        </div>
+        <div class="seccionActividad">
+            <h2>ACTIVIDAD 1 - PROYECTO DE SOFTWARE</h2>
+            <button id="boton-seccion">Mostrar Actividad</button>
+    
+            <section id="imagen-video">
+                <img src="image.png">
+                <br>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Video Generado!</a>
+            </section>
+        </div>
+    </div>
+    
+
+    <script>
+         // Datos de los cursos (puedes añadir más cursos según sea necesario)
+         const coursesData = {
+            ingles: [
+                { title: "Curso de Inglés Básico", programLink: "pdf/ingles_basico.pdf" },
+                { title: "Curso de Inglés Intermedio", programLink: "pdf/ingles_intermedio.pdf" },
+            ],
+            frances: [
+                { title: "Curso de Francés Básico", programLink: "pdf/frances_basico.pdf" },
+                { title: "Curso de Francés Avanzado", programLink: "pdf/frances_avanzado.pdf" },
+            ],
+        };
+
+        const categorySelect = document.getElementById("category");
+        const coursesContainer = document.getElementById("courses");
+
+        // Función para mostrar cursos según la categoría seleccionada
+        categorySelect.addEventListener("change", () => {
+            const selectedCategory = categorySelect.value;
+            const courses = coursesData[selectedCategory];
+
+            if (courses) {
+                const courseList = courses.map(course => `
+                    <div class="course">
+                        <h3>${course.title}</h3>
+                        <a href="${course.programLink}" download>Descargar programa</a>
+                    </div>
+                `).join("");
+
+                coursesContainer.innerHTML = courseList;
+            } else {
+                coursesContainer.innerHTML = "";
+            }
+        });
+
+        // Mostrar cursos de la categoría inicial
+        categorySelect.dispatchEvent(new Event("change"));
+
+        const botonMostrar = document.getElementById("boton-seccion");
+        const imagenVideo = document.getElementById("imagen-video");
+
+        botonMostrar.addEventListener("click", function() {
+            if(imagenVideo.style.display == "block"){
+                imagenVideo.style.display = "none";
+            }
+            else{
+                imagenVideo.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
